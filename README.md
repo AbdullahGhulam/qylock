@@ -158,6 +158,14 @@ chmod +x setup.sh
 
 <br>
 
+### ◈ Genshin Impact
+
+<div align="center">
+  <img src="./Assets/genshin.gif" width="100%"/>
+</div>
+
+<br>
+
 ---
 
 <div align="center">
