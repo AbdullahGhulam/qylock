@@ -89,7 +89,7 @@ chmod +x setup.sh
 ### ◈ NieR: Automata
 
 <div align="center">
-  <video src="./Assets/nier_automata.mp4" width="100%" controls></video>
+  <img src="./Assets/nier_automata.gif" width="100%"/>
 </div>
 
 <br>
@@ -97,7 +97,7 @@ chmod +x setup.sh
 ### ◈ Terraria
 
 <div align="center">
-  <video src="./Assets/terraria.mp4" width="100%" controls></video>
+  <img src="./Assets/terraria.gif" width="100%"/>
 </div>
 
 <br>
@@ -105,7 +105,7 @@ chmod +x setup.sh
 ### ◈ Enfield
 
 <div align="center">
-  <video src="./Assets/enfield.mp4" width="100%" controls></video>
+  <img src="./Assets/enfield.gif" width="100%"/>
 </div>
 
 <br>
@@ -113,7 +113,7 @@ chmod +x setup.sh
 ### ◈ Sword
 
 <div align="center">
-  <video src="./Assets/sword.mp4" width="100%" controls></video>
+  <img src="./Assets/sword.gif" width="100%"/>
 </div>
 
 <br>
@@ -121,7 +121,7 @@ chmod +x setup.sh
 ### ◈ Paper
 
 <div align="center">
-  <video src="./Assets/paper.mp4" width="100%" controls></video>
+  <img src="./Assets/paper.gif" width="100%"/>
 </div>
 
 <br>
@@ -129,7 +129,7 @@ chmod +x setup.sh
 ### ◈ Windows 7
 
 <div align="center">
-  <video src="./Assets/win7.mp4" width="100%" controls></video>
+  <img src="./Assets/win7.gif" width="100%"/>
 </div>
 
 <br>
@@ -137,7 +137,7 @@ chmod +x setup.sh
 ### ◈ Cyberpunk
 
 <div align="center">
-  <video src="./Assets/cyberpunk.mp4" width="100%" controls></video>
+  <img src="./Assets/cyberpunk.gif" width="100%"/>
 </div>
 
 <br>
@@ -145,7 +145,7 @@ chmod +x setup.sh
 ### ◈ TUI
 
 <div align="center">
-  <video src="./Assets/tui.mp4" width="100%" controls></video>
+  <img src="./Assets/tui.gif" width="100%"/>
 </div>
 
 <br>
@@ -153,7 +153,7 @@ chmod +x setup.sh
 ### ◈ Porsche
 
 <div align="center">
-  <video src="./Assets/porsche.mp4" width="100%" controls></video>
+  <img src="./Assets/porsche.gif" width="100%"/>
 </div>
 
 <br>
