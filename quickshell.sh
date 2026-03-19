@@ -101,6 +101,69 @@ else
     fi
 fi
 
+# Sub-selection logic for variants (Ported from sddm.sh)
+if [ "$THEME_NAME" == "cozytile" ]; then
+    info "Selecting variant for Cozytile theme..."
+    COZYTILE_DIR="$THEMES_DIR/cozytile"
+    if ! command -v fzf &> /dev/null; then
+        VARIANTS=($(ls -1 "$COZYTILE_DIR"))
+        for i in "${!VARIANTS[@]}"; do
+            echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}$((i+1)) ${C_DIM}❯ ${C_RESET}${VARIANTS[$i]}"
+        done
+        echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice: ${C_RESET}"
+        read -rp "" V_SELECTION
+        if [[ "$V_SELECTION" =~ ^[0-9]+$ ]] && [ "$V_SELECTION" -ge 1 ] && [ "$V_SELECTION" -le "${#VARIANTS[@]}" ]; then
+            THEME_NAME="cozytile/${VARIANTS[$((V_SELECTION-1))]}"
+        fi
+    else
+        SELECTED_VARIANT=$(ls -1 "$COZYTILE_DIR" | fzf --prompt="Select variant: " --height=10 --reverse --border --header="Choose a Cozytile variant")
+        [ -n "$SELECTED_VARIANT" ] && THEME_NAME="cozytile/$SELECTED_VARIANT"
+    fi
+fi
+
+if [ "$THEME_NAME" == "tui" ]; then
+    info "Selecting variant for TUI theme..."
+    TUI_VARIANTS_DIR="$THEMES_DIR/tui"
+    if ! command -v fzf &> /dev/null; then
+        VARIANTS=($(ls -1 "$TUI_VARIANTS_DIR"))
+        for i in "${!VARIANTS[@]}"; do
+            echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}$((i+1)) ${C_DIM}❯ ${C_RESET}${VARIANTS[$i]}"
+        done
+        echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice: ${C_RESET}"
+        read -rp "" V_SELECTION
+        if [[ "$V_SELECTION" =~ ^[0-9]+$ ]] && [ "$V_SELECTION" -ge 1 ] && [ "$V_SELECTION" -le "${#VARIANTS[@]}" ]; then
+            THEME_NAME="tui/${VARIANTS[$((V_SELECTION-1))]}"
+        fi
+    else
+        SELECTED_VARIANT=$(ls -1 "$TUI_VARIANTS_DIR" | fzf --prompt="Select TUI variant: " --height=10 --reverse --border --header="Choose a TUI color variant")
+        [ -n "$SELECTED_VARIANT" ] && THEME_NAME="tui/$SELECTED_VARIANT"
+    fi
+fi
+
+if [ "$THEME_NAME" == "terraria" ]; then
+    info "Customizing Terraria sub-theme..."
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Time-based (Transitions with day/night)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Random (New background per lock)"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice [1/2]: ${C_RESET}"
+    read -rp "" SUB_OPT
+    case $SUB_OPT in
+        1) sed -i "s/^background_mode=.*/background_mode=time/" "$THEMES_DIR/terraria/theme.conf" ;;
+        2) sed -i "s/^background_mode=.*/background_mode=random/" "$THEMES_DIR/terraria/theme.conf" ;;
+    esac
+fi
+
+if [ "$THEME_NAME" == "Genshin" ]; then
+    info "Customizing Genshin Impact sub-theme..."
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Time-based (Dawn / Day / Dusk / Night)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Random (New background per lock)"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice [1/2]: ${C_RESET}"
+    read -rp "" SUB_OPT
+    case $SUB_OPT in
+        1) sed -i "s/^background_mode=.*/background_mode=time/" "$THEMES_DIR/Genshin/theme.conf" ;;
+        2) sed -i "s/^background_mode=.*/background_mode=random/" "$THEMES_DIR/Genshin/theme.conf" ;;
+    esac
+fi
+
 # Check for fonts in the selected theme
 FONT_COUNT=$(ls -1 "$THEMES_DIR/$THEME_NAME/font" 2>/dev/null | grep -E "\.(ttf|otf)$" | wc -l)
 if [ "$FONT_COUNT" -eq 0 ]; then
@@ -111,7 +174,7 @@ if [ "$FONT_COUNT" -eq 0 ]; then
     echo -e "${C_YELLOW}${C_BOLD} ╰─ ${C_DIM}Refer to README.md for font suggestions.${C_RESET}\n"
 fi
 
-sed -i "s/export QS_THEME=.*$/export QS_THEME=\"\${1:-$THEME_NAME}\"/" "$TARGET_DIR/lock.sh"
+sed -i "s|export QS_THEME=.*$|export QS_THEME=\"\${1:-$THEME_NAME}\"|" "$TARGET_DIR/lock.sh"
 success "Theme '$THEME_NAME' set as lockscreen default!"
 
 info "Keyboard Shortcut Instructions"

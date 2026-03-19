@@ -1,1 +1,2 @@
-/usr/lib/qt6/qml/Qt5Compat/GraphicalEffects/RadialGradient.qml
+import Qt5Compat.GraphicalEffects as T
+T.RadialGradient {}

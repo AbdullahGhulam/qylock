@@ -1,13 +1,4 @@
 module QtMultimedia
-
-Video 5.15 VideoShim.qml
-MediaPlayer 5.15 MediaPlayerShim.qml
-VideoOutput 5.15 VideoOutputShim.qml
-
-Video 1.15 VideoShim.qml
-MediaPlayer 1.15 MediaPlayerShim.qml
-VideoOutput 1.15 VideoOutputShim.qml
-
-Video 5.0 VideoShim.qml
-MediaPlayer 5.0 MediaPlayerShim.qml
-VideoOutput 5.0 VideoOutputShim.qml
+Video 5.15 Video.qml
+MediaPlayer 5.15 MediaPlayer.qml
+VideoOutput 5.15 VideoOutput.qml
