@@ -68,6 +68,7 @@ Some themes in this collection use premium or trademarked fonts that cannot be r
 | **Sword** | The Last Shuriken | `The Last Shuriken.ttf` |
 | **Minecraft** | Minecraft Regular | `minecraft.ttf` |
 
+
 **Instructions:**
 1. Navigate to the theme folder: `themes/<theme_name>/font/`
 2. Place your `.ttf` or `.otf` file inside that `font` folder.
@@ -184,6 +185,14 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 
 <div align="center">
   <img src="./Assets/genshin.gif" width="100%"/>
+</div>
+
+<br>
+
+### ◈ Ninja Gaiden
+
+<div align="center">
+  <img src="./Assets/ninja_gaiden.gif" width="100%"/>
 </div>
 
 <br>
