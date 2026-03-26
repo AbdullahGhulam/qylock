@@ -14,15 +14,8 @@
   <a href="https://www.qt.io"><img src="https://img.shields.io/badge/QT_QML-000000?style=for-the-badge&logo=qt&logoColor=white" align="left"/></a>
   
   <div align="right">
-    <details>
-      <summary>☕ sᴜᴘᴘᴏʀᴛ ᴍʏ ᴡᴏʀᴋ</summary>
-      <p align="right">
-        <br>
-        <img src="https://img.shields.io/badge/UPI-abhaydevka169%40okicici-00BFFF?style=for-the-badge&logo=google-pay&logoColor=white"/>
-        <br><br>
-        <i>Means a lot, tysm <3</i>
-      </p>
-    </details>
+    <a title="abhaydevka169@okicici"><img src="https://img.shields.io/badge/UPI-000000?style=for-the-badge&logo=google-pay&logoColor=white"/></a>
+    <a href="https://ko-fi.com/kaizky1"><img src="https://img.shields.io/badge/KO--FI-000000?style=for-the-badge&logo=kofi&logoColor=white"/></a>
   </div>
 </div>
 
