@@ -194,7 +194,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Coffee
 
 <div align="center">
-  <img src="./Assets/pixel_coffee.gif" width="100%"/>
+  <img src="./Assets/pixel-coffee.gif" width="100%"/>
 </div>
 
 <br>
@@ -202,7 +202,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Dusk City
 
 <div align="center">
-  <img src="./Assets/pixel_dusk_city.gif" width="100%"/>
+  <img src="./Assets/pixel-dusk-city.gif" width="100%"/>
 </div>
 
 <br>
@@ -210,7 +210,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Emerald
 
 <div align="center">
-  <img src="./Assets/pixel_emerald.gif" width="100%"/>
+  <img src="./Assets/pixel-emerald.gif" width="100%"/>
 </div>
 
 <br>
@@ -218,7 +218,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Hollow Knight
 
 <div align="center">
-  <img src="./Assets/pixel_hollowknight.gif" width="100%"/>
+  <img src="./Assets/pixel-hollowknight.gif" width="100%"/>
 </div>
 
 <br>
@@ -226,7 +226,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Munchax
 
 <div align="center">
-  <img src="./Assets/pixel_munchax.gif" width="100%"/>
+  <img src="./Assets/pixel-munchax.gif" width="100%"/>
 </div>
 
 <br>
@@ -234,7 +234,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Night City
 
 <div align="center">
-  <img src="./Assets/pixel_night_city.gif" width="100%"/>
+  <img src="./Assets/pixel-night-city.gif" width="100%"/>
 </div>
 
 <br>
@@ -242,7 +242,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Rainy Room
 
 <div align="center">
-  <img src="./Assets/pixel_rainyroom.gif" width="100%"/>
+  <img src="./Assets/pixel-rainyroom.gif" width="100%"/>
 </div>
 
 <br>
@@ -250,7 +250,7 @@ Once completed, simply bind a keyboard shortcut in your Window Manager's configu
 ### ◈ Pixel - Skyscrapers
 
 <div align="center">
-  <img src="./Assets/pixel_skyscrapers.gif" width="100%"/>
+  <img src="./Assets/pixel-skyscrapers.gif" width="100%"/>
 </div>
 
 <br>
