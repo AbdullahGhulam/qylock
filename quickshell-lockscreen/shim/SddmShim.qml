@@ -54,6 +54,7 @@ Item {
         id: internalUserModel
         property string lastUser: Quickshell.env("USER") || "traveler"
         property int lastIndex: 0
+        function rowCount() { return count; }
 
         function index(row, col) {
             return row;
@@ -80,6 +81,7 @@ Item {
     property var sessionModel: ListModel {
         id: internalSessionModel
         property int lastIndex: 0
+        function rowCount() { return count; }
         Component.onCompleted: {
             // Initial placeholder to ensure ListView.currentItem isn't null
             append({ name: "Session", file: "" });
