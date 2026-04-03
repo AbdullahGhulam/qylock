@@ -336,7 +336,8 @@ Rectangle {
             // Dropdown
             Item {
                 id: sessionDropdown
-                opacity: 0; z: -100
+                visible: false
+                opacity: visible ? 1 : 0; z: visible ? 100 : -100
                 width: parent.width
                 height: Math.min(sessionModel.rowCount() * 38, 152)
                 // opens ABOVE the session button
