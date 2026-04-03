@@ -52,9 +52,10 @@ Rectangle {
             source: "bg.mp4"
             loops: MediaPlayer.Infinite
             autoPlay: true
-            audioOutput: AudioOutput { volume: 0.85 }
+            audioOutput: audioOut
             videoOutput: bgVideoOutput
         }
+        AudioOutput { id: audioOut; volume: 0.85 }
         VideoOutput {
             id: bgVideoOutput
             anchors.fill: parent

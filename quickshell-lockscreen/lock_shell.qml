@@ -1,7 +1,9 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import QtMultimedia
 import "./shim"
+
 
 ShellRoot {
     id: shellRoot
