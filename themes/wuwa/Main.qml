@@ -193,9 +193,9 @@ Rectangle {
                     Text {
                         id: userNameText
                         text: {
-                            var _forceUpdate = userModel.count; // Force reactivity when model populates
+                            var _forceUpdate = userModel.count; 
                             var realName = userModel.data(userModel.index(root.userIndex, 0), Qt.UserRole + 1)
-                            return (realName ? realName : "Rover").toUpperCase()
+                            return (realName ? realName : (userModel.lastUser || "User")).toUpperCase()
                         }
                         font.family: mainFont.name; font.pixelSize: 14 * s
                         font.letterSpacing: 2 * s; font.bold: true
