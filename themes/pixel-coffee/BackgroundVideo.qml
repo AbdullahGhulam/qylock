@@ -11,7 +11,8 @@ Item {
         source: "bg.mp4"
         autoPlay: true
         loops: MediaPlayer.Infinite
-        audioOutput: AudioOutput { volume: 0 }
+        audioOutput: audioOut
+        AudioOutput { id: audioOut; volume: 0 }
         videoOutput: videoOutput
     }
 
