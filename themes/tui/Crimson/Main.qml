@@ -89,10 +89,10 @@ Rectangle {
 
     // Session Helper
     ListView {
-        id: sessionNameHelper
+        id: sessionHelper
         model: sessionModel; currentIndex: sessionIndex
         visible: false; width: 0 * s; height: 0 * s
-        delegate: Item { property string sessionName: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     // User Helper
@@ -327,7 +327,7 @@ Rectangle {
                     TuiBtn {
                         id: sessionBtn
                         anchors.verticalCenter: parent.verticalCenter
-                        btnLabel: ((sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionModel.get(root.sessionIndex).name : "default") + " [ CYCLE ]"
+                        btnLabel: ((sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionHelper.currentItem.sName : "default") + " [ CYCLE ]"
                         KeyNavigation.backtab: loginBtn
                         KeyNavigation.tab:     shutdownBtn
                         onClicked: root.sessionIndex = (root.sessionIndex + 1) % sessionModel.rowCount()

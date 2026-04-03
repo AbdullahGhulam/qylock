@@ -507,7 +507,7 @@ Rectangle {
                     id: sessionPillText
                     anchors.centerIn: parent
                 text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0)
-                      ? sessionModel.get(root.sessionIndex).name : "Session"
+                      ? sessionHelper.currentItem.sName : "Session"
                     font.family: root.customFontName
                     font.pixelSize: 12 * s
                     color: "white"

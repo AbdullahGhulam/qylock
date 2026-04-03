@@ -98,11 +98,11 @@ Rectangle {
 
     // Session Helper
     ListView {
-        id: sessionNameHelper
+        id: sessionHelper
         model: sessionModel
         currentIndex: sessionIndex
         visible: false; width: 0 * s; height: 0 * s
-        delegate: Item { property string sessionName: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     // UI Stack
@@ -326,7 +326,7 @@ Rectangle {
                 id: sessionBtn
                 width: parent.width
                 height: 44 * s
-                label: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0 ? sessionModel.get(root.sessionIndex).name : "Select Session")
+                label: (sessionHelper.currentItem && sessionHelper.currentItem.sName ? sessionHelper.currentItem.sName : "Session")
                      + (sessionDropdown.visible ? "  ▲" : "  ▼")
                 KeyNavigation.backtab: loginBtn
                 KeyNavigation.tab: shutdownBtn

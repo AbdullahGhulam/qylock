@@ -54,7 +54,7 @@ Rectangle {
         id: sessionHelper
         model: sessionModel; currentIndex: root.sessionIndex
         opacity: 0; width: 100; height: 100; z: -100
-        delegate: Item { property string name: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     Item {
@@ -237,7 +237,7 @@ Rectangle {
                 }
 
                 Text {
-                    text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionModel.get(root.sessionIndex).name : "Select Realm"
+                    text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionHelper.currentItem.sName : "Select Realm"
                     anchors.centerIn: parent
                     font.family: mainFont.name; font.pixelSize: 22 * s; color: "#ece5d8"
                     font.letterSpacing: 1.5 * s

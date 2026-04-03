@@ -80,10 +80,10 @@ Rectangle {
     FontLoader { id: mainFont; source: fontFolder.count > 0 ? "font/" + fontFolder.get(0, "fileName") : "" }
 
     ListView {
-        id: sessionNameHelper
+        id: sessionHelper
         model: sessionModel; currentIndex: root.sessionIndex
         visible: false; width: 0 * s; height: 0 * s
-        delegate: Item { property string sessionName: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     // Auto-focus fix for Quickshell (Loader does not propagate focus: true)
@@ -788,7 +788,7 @@ Rectangle {
                 
                 // Session dropdown button mapped to World
                 TerraButton {
-                    text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? "World: " + sessionModel.get(root.sessionIndex).name : "Select World"
+                    text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? "World: " + sessionHelper.currentItem.sName : "Select World"
                     fontPixelSize: 24
                     onClicked: {
                         if (sessionModel && sessionModel.rowCount() > 0) {

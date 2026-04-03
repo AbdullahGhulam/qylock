@@ -272,7 +272,7 @@ Rectangle {
             }
             Text {
                 text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0)
-                      ? sessionModel.get(root.sessionIndex).name
+                      ? sessionHelper.currentItem.sName
                       : "Session"
                 color: "white"
                 opacity: 0.45

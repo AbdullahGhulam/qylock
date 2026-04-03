@@ -43,10 +43,10 @@ Rectangle {
 
     // Session Helper
     ListView {
-        id: sessionNameHelper
+        id: sessionHelper
         model: sessionModel; currentIndex: root.sessionIndex
         visible: false; width: 0 * s; height: 0 * s
-        delegate: Item { property string sessionName: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     // Timer
@@ -323,7 +323,7 @@ Rectangle {
 
                 CyberButton {
                     text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0)
-                          ? "FIRMWARE: " + sessionModel.get(root.sessionIndex).name 
+                          ? "FIRMWARE: " + sessionHelper.currentItem.sName 
                           : "CHANGE FIRMWARE"
                     fontName: mainFont.name
                     onClicked: {

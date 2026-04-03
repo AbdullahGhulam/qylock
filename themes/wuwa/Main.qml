@@ -36,7 +36,7 @@ Rectangle {
         id: sessionHelper
         model: sessionModel; currentIndex: root.sessionIndex
         opacity: 0; width: 100; height: 100; z: -100
-        delegate: Item { property string name: model.name || "" }
+        delegate: Item { property string sName: model.name || "" }
     }
 
     // Auto-focus fix for Quickshell (Loader does not propagate focus: true)
@@ -194,8 +194,8 @@ Rectangle {
                         id: userNameText
                         text: {
                             var _forceUpdate = userModel.count; 
-                            var realName = userModel.data(userModel.index(root.userIndex, 0), Qt.UserRole + 1)
-                            return (realName ? realName : (userModel.lastUser || "User")).toUpperCase()
+                            var realName = userModel.data(userModel.index(root.userIndex, 0), Qt.UserRole + 1) || userModel.lastUser || "User"
+                            return realName.toUpperCase()
                         }
                         font.family: mainFont.name; font.pixelSize: 14 * s
                         font.letterSpacing: 2 * s; font.bold: true
@@ -303,7 +303,7 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                     }
                     Text {
-                        text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionModel.get(root.sessionIndex).name : "Select Session"
+                        text: (sessionModel && sessionModel.count > root.sessionIndex && root.sessionIndex >= 0) ? sessionHelper.currentItem.sName : "Select Session"
                         font.family: mainFont.name; font.pixelSize: 12 * s
                         font.letterSpacing: 0.5 * s
                         color: root.wSilver

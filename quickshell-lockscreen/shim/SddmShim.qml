@@ -82,6 +82,12 @@ Item {
         id: internalSessionModel
         property int lastIndex: 0
         function rowCount() { return count; }
+        function index(row, col) { return row; }
+        function data(row, role) {
+            var item = get(row);
+            if (!item) return "";
+            return item.name;
+        }
         Component.onCompleted: {
             // Initial placeholder to ensure ListView.currentItem isn't null
             append({ name: "Session", file: "" });
