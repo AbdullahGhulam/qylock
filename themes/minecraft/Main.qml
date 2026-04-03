@@ -45,9 +45,9 @@ Rectangle {
         Image {
             anchors.fill: parent
             source: "background.png"
-            fillMode: Image.Tile
-            horizontalAlignment: Image.AlignLeft
-            verticalAlignment: Image.AlignTop
+            fillMode: Image.PreserveAspectCrop
+            horizontalAlignment: Image.AlignHCenter
+            verticalAlignment: Image.AlignVCenter
             scale: 2.0 
             transformOrigin: Item.Center
         }
