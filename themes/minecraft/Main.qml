@@ -39,17 +39,23 @@ Rectangle {
     FontLoader { id: mcFont; source: fontFolder.count > 0 ? "font/" + fontFolder.get(0, "fileName") : "" }
     TextConstants { id: textConstants }
 
-    // --- Background (Tiled Dirt) ---
+    // Background
     Item {
-        anchors.fill: parent
+        anchors.fill: parent; z: 0
         Image {
             anchors.fill: parent
-            source: "background.png"
-            fillMode: Image.PreserveAspectCrop
-            horizontalAlignment: Image.AlignHCenter
-            verticalAlignment: Image.AlignVCenter
-            scale: 2.0 
-            transformOrigin: Item.Center
+            source: "background.png"; fillMode: Image.PreserveAspectCrop
+            horizontalAlignment: Image.AlignHCenter; verticalAlignment: Image.AlignVCenter
+            scale: 2.0; transformOrigin: Item.Center
+        }
+    }
+
+    // Vignette
+    RadialGradient {
+        anchors.fill: parent; z: 1
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "transparent" }
+            GradientStop { position: 1.2; color: "#aa000000" }
         }
     }
 
@@ -81,6 +87,13 @@ Rectangle {
                 width: 850 * s; height: 180 * s
                 fillMode: Image.PreserveAspectFit
                 anchors.horizontalCenter: parent.horizontalCenter
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    transparentBorder: true
+                    horizontalOffset: 4 * s; verticalOffset: 4 * s
+                    radius: 8 * s; samples: 16
+                    color: "#cc000000"
+                }
             }
 
             // Animated Splash (Overlapping the top-right corner)
@@ -97,7 +110,7 @@ Rectangle {
                     NumberAnimation { from: 1.18; to: 1.0; duration: 600; easing.type: Easing.InOutQuad }
                 }
                 Component.onCompleted: {
-                    var splashes = ["I use Arch btw", "RTFM!", "sudo rm -rf /", "Kernel Panic!", "Btw I use NixOS!", "Pacman -Syu", "chmod 777", "Segmentation Fault"];
+                    var splashes = ["I use Arch btw", "|||RTFM!|||", "sudo rm -rf /", "Kernel Panic!", "Btw I use NixOS!", "Pacman -Syu", "chmod 777", "Segmentation Fault"];
                     text = splashes[Math.floor(Math.random() * splashes.length)];
                 }
             }
@@ -105,7 +118,7 @@ Rectangle {
 
         Item { width: 1; height: 12 * s } 
 
-        // --- Username Area ---
+        // Username Area
         Column {
             width: parent.width; spacing: 10 * s
             McText { label: "Logged in as:"; pixelSize: 12 * s; textColor: root.mcTextGray }
@@ -125,7 +138,7 @@ Rectangle {
             }
         }
 
-        // --- Password Area ---
+        // Password Area
         Column {
             width: parent.width; spacing: 10 * s
             McText { label: "Enter Password:"; pixelSize: 12 * s; textColor: root.mcTextGray }
@@ -156,7 +169,7 @@ Rectangle {
 
         Item { width: 1; height: 10 * s } // Spacer
 
-        // --- Action Buttons ---
+        // Action Buttons
         McButton { 
             id: loginBtn; width: parent.width; height: 48 * s; label: "Login"
             onClicked: doLogin(); KeyNavigation.tab: sessionBtn; KeyNavigation.backtab: passInput
@@ -175,20 +188,28 @@ Rectangle {
         }
     }
 
-    // --- Overlay Session Switcher ---
+    // Session Menu
     Item {
         id: sessionOverlay
         anchors.fill: parent; visible: root.sessionPopupOpen; z: 5000
         
-        // Background Tint (High Opacity)
-        Rectangle { anchors.fill: parent; color: "black"; opacity: 0.88 }
-        
+        // Overlay Background
+        Rectangle { 
+            anchors.fill: parent; color: "black"; opacity: 0.9 
+            Image { anchors.fill: parent; source: "background.png"; fillMode: Image.Tile; opacity: 0.12; visible: sessionOverlay.visible }
+        }
+
         Column {
-            anchors.centerIn: parent; width: 420 * s; spacing: 16 * s
+            id: sessionContent
+            anchors.centerIn: parent; width: 440 * s; spacing: 16 * s
+            opacity: sessionOverlay.visible ? 1 : 0
+            scale: sessionOverlay.visible ? 1 : 0.9
+            Behavior on opacity { NumberAnimation { duration: 200 } }
+            Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutBack } }
             
             McText {
-                label: "SELECT SESSION"; pixelSize: 24 * s; textColor: root.mcTextYellow
-                anchors.horizontalCenter: parent.horizontalCenter
+                label: "SELECT SESSION"; pixelSize: 26 * s; textColor: root.mcTextYellow
+                anchors.horizontalCenter: parent.horizontalCenter; horizontalAlignment: Text.AlignHCenter
             }
             
             Item { width: 1; height: 10 * s }
@@ -198,13 +219,9 @@ Rectangle {
                 Repeater {
                     model: sessionModel
                     McButton {
-                        width: 420 * s; height: 44 * s
+                        width: 440 * s; height: 50 * s
                         label: model.name || "Default"
-                        // Highlight current
-                        Rectangle {
-                            anchors.fill: parent; color: "transparent"; border.color: root.mcTextYellow; border.width: 2 * s
-                            visible: index === root.sessionIndex
-                        }
+                        isActive: index === root.sessionIndex
                         onClicked: { root.sessionIndex = index; root.sessionPopupOpen = false }
                     }
                 }
@@ -224,11 +241,11 @@ Rectangle {
         focus: visible
     }
 
-    // --- Java Edition Style Corners ---
+    // Corners
     Item {
         anchors.fill: parent; opacity: root.uiOpacity
         
-        // Bottom-Left (Time as Version)
+        // Bottom Left
         McText {
             anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.margins: 6 * s
             id: versionText; label: "Current Time: " + Qt.formatTime(new Date(), "HH:mm")
@@ -236,7 +253,7 @@ Rectangle {
             Timer { interval: 1000; running: true; repeat: true; onTriggered: versionText.label = "Current Time: " + Qt.formatTime(new Date(), "HH:mm") }
         }
 
-        // Bottom-Right (Date as Copyright)
+        // Bottom Right
         McText {
             anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 6 * s
             label: Qt.formatDate(new Date(), "dddd, MMMM d")
@@ -244,7 +261,7 @@ Rectangle {
         }
     }
 
-    // --- Fade-in ---
+    // Fade-In
     NumberAnimation { id: fadeIn; target: root; property: "uiOpacity"; to: 1; duration: 1000; easing.type: Easing.OutCubic }
     Component.onCompleted: fadeIn.start()
 
@@ -260,14 +277,16 @@ Rectangle {
 
     Connections { target: sddm; function onLoginFailed() { errText.text = "INVALID CREDENTIALS"; passInput.text = ""; passInput.forceActiveFocus() } }
 
-    // --- Minecraft Components ---
+    // Components
     component McText: Item {
         property string label: ""; property int pixelSize: 16 * s; property color textColor: root.mcTextWhite
         property int horizontalAlignment: Text.AlignLeft
+        property int shadowOffset: 2 * s
         implicitWidth: fore.implicitWidth + 8 * s; implicitHeight: fore.implicitHeight + 2 * s
-        Text { x: 2 * s; y: 2 * s; width: parent.width; text: label; color: root.mcTextShadow; font.family: mcFont.name; font.pixelSize: pixelSize; horizontalAlignment: parent.horizontalAlignment }
+        Text { x: shadowOffset; y: shadowOffset; width: parent.width; text: label; color: root.mcTextShadow; font.family: mcFont.name; font.pixelSize: pixelSize; horizontalAlignment: parent.horizontalAlignment }
         Text { id: fore; width: parent.width; text: label; color: textColor; font.family: mcFont.name; font.pixelSize: pixelSize; horizontalAlignment: parent.horizontalAlignment }
     }
+    
     component McTextField: Item {
         property var inputRef
         Rectangle {
@@ -282,20 +301,31 @@ Rectangle {
             }
         }
     }
+    
     component McButton: Item {
         id: mcBtn; property string label: ""; signal clicked()
+        property bool isActive: false
+        implicitWidth: 200; implicitHeight: 48
+        
         Rectangle {
             anchors.fill: parent; color: "black"
             Rectangle {
-                anchors.fill: parent; anchors.margins: 1.5 * s
-                color: mcMouse.pressed ? root.mcBtnPress : (mcMouse.containsMouse ? root.mcBtnHover : root.mcBtnFace)
-                Rectangle { anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right; height: 2.5 * s; color: root.mcBtnHighlight; opacity: mcMouse.pressed ? 0.2 : 0.8 }
-                Rectangle { anchors.top: parent.top; anchors.left: parent.left; anchors.bottom: parent.bottom; width: 2.5 * s; color: root.mcBtnHighlight; opacity: mcMouse.pressed ? 0.2 : 0.8 }
-                Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 2.5 * s; color: root.mcBtnShadow }
-                Rectangle { anchors.top: parent.top; anchors.right: parent.right; anchors.bottom: parent.bottom; width: 2.5 * s; color: root.mcBtnShadow }
-                McText { anchors.centerIn: parent; label: mcBtn.label; textColor: mcMouse.containsMouse ? root.mcTextYellow : root.mcTextWhite; pixelSize: 18 * s }
+                anchors.fill: parent; anchors.margins: 2 * s
+                color: mcMouse.pressed ? root.mcBtnPress : (mcMouse.containsMouse ? "#686868" : (mcBtn.isActive ? "#454545" : root.mcBtnFace))
+                
+                // 3D Bevels
+                Rectangle { anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right; height: 3 * s; color: "white"; opacity: mcMouse.pressed ? 0.1 : (mcMouse.containsMouse ? 0.4 : 0.2) }
+                Rectangle { anchors.top: parent.top; anchors.left: parent.left; anchors.bottom: parent.bottom; width: 3 * s; color: "white"; opacity: mcMouse.pressed ? 0.1 : (mcMouse.containsMouse ? 0.4 : 0.2) }
+                Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 3 * s; color: "black"; opacity: 0.4 }
+                Rectangle { anchors.top: parent.top; anchors.right: parent.right; anchors.bottom: parent.bottom; width: 3 * s; color: "black"; opacity: 0.4 }
+                
+                McText { 
+                    anchors.centerIn: parent
+                    label: mcBtn.label; textColor: mcMouse.containsMouse ? root.mcTextYellow : root.mcTextWhite; pixelSize: 18 * s 
+                    shadowOffset: mcMouse.pressed ? 3 * s : 2 * s // Text "sinks" into button
+                }
             }
-            Rectangle { anchors.fill: parent; color: "transparent"; border.color: "white"; border.width: 1.5 * s; visible: mcMouse.containsMouse && !mcMouse.pressed }
+            // Removed Hover Outline for "Humble" Dark Look
         }
         MouseArea { id: mcMouse; anchors.fill: parent; hoverEnabled: true; onClicked: mcBtn.clicked() }
     }

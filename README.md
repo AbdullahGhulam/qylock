@@ -169,6 +169,36 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
     </tr>
     <tr>
       <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Enfield</b><br><br>
+        <img src="./Assets/enfield.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Sword</b><br><br>
+        <img src="./Assets/sword.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Honkai: Star Rail</b><br><br>
+        <img src="./Assets/star_rail.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Genshin Impact</b><br><br>
+        <img src="./Assets/genshin.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Wuthering Waves</b><br><br>
+        <img src="./Assets/wuwa.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Minecraft</b><br><br>
+        <img src="./Assets/minecraft.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>      
+    </tr>
+    <tr>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
         <b>NieR: Automata</b><br><br>
         <img src="./Assets/nier_automata.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
@@ -179,12 +209,12 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
     </tr>
     <tr>
       <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Enfield</b><br><br>
-        <img src="./Assets/enfield.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+        <b>Ninja Gaiden</b><br><br>
+        <img src="./Assets/ninja_gaiden.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
       <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Sword</b><br><br>
-        <img src="./Assets/sword.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+        <b>Porsche</b><br><br>
+        <img src="./Assets/porsche.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
     </tr>
     <tr>
@@ -205,36 +235,6 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
       <td align="center" width="50%" style="padding: 15px; border: none;">
         <b>TUI</b><br><br>
         <img src="./Assets/tui.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Porsche</b><br><br>
-        <img src="./Assets/porsche.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Genshin Impact</b><br><br>
-        <img src="./Assets/genshin.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Honkai: Star Rail</b><br><br>
-        <img src="./Assets/star_rail.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Wuthering Waves</b><br><br>
-        <img src="./Assets/wuwa.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Ninja Gaiden</b><br><br>
-        <img src="./Assets/ninja_gaiden.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" width="50%" style="padding: 15px; border: none;">
-        <b>Minecraft</b><br><br>
-        <img src="./Assets/minecraft.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
     </tr>
   </table>
