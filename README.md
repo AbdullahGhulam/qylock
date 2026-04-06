@@ -179,6 +179,16 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
     </tr>
     <tr>
       <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Forest</b><br><br>
+        <img src="./Assets/forest.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Winter</b><br><br>
+        <img src="./Assets/winter.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
         <b>Honkai: Star Rail</b><br><br>
         <img src="./Assets/star_rail.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
