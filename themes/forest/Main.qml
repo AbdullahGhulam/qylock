@@ -132,7 +132,7 @@ Item {
         opacity: root.uiOpacity
         scale: 1.0
         
-        layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#2a000000"; radius: 30*s; samples: 81; verticalOffset: 10 * s }
+        layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#35000000"; radius: 30*s; samples: 81; verticalOffset: 10 * s }
         
         LiquidGlass { glassRadius: 25 * s }
     
@@ -164,7 +164,7 @@ Item {
             Behavior on opacity { NumberAnimation { duration: 400 } }
             Behavior on y { NumberAnimation { duration: 500; easing.type: Easing.OutQuart } }
             Behavior on height { NumberAnimation { duration: 500; easing.type: Easing.OutQuart } }
-            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#2a000000"; radius: root.userPopupOpen ? 45*s : 30*s; verticalOffset: 10 * s }
+            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#35000000"; radius: root.userPopupOpen ? 45*s : 30*s; verticalOffset: 10 * s }
             
             LiquidGlass { 
                 glassRadius: 22 * s 
@@ -213,7 +213,7 @@ Item {
         Item {
             id: passwordCard; width: parent.width; height: 75 * s; y: 95 * s
             opacity: (root.sessionPopupOpen || root.userPopupOpen) ? 0.0 : 1.0
-            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: passInput.activeFocus ? "#33d3eaad" : "#2a000000"; radius: 30*s; verticalOffset: 8 * s }
+            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: passInput.activeFocus ? "#33d3eaad" : "#35000000"; radius: 30*s; verticalOffset: 8 * s }
             Behavior on opacity { NumberAnimation { duration: 400 } }
             LiquidGlass {
                 glassRadius: 22 * s
@@ -280,7 +280,7 @@ Item {
             Behavior on opacity { NumberAnimation { duration: 400 } }
             Behavior on y { NumberAnimation { duration: 500; easing.type: Easing.OutQuart } }
             Behavior on height { NumberAnimation { duration: 500; easing.type: Easing.OutQuart } }
-            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#2a000000"; radius: root.sessionPopupOpen ? 45*s : 30*s; verticalOffset: 10 * s }
+            layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#35000000"; radius: root.sessionPopupOpen ? 45*s : 30*s; verticalOffset: 10 * s }
             
             LiquidGlass { glassRadius: 22 * s; blurBrightness: root.sessionPopupOpen ? -0.25 : (sessMouse.containsMouse ? -0.05 : -0.10); topRimColor: (sessMouse.containsMouse || root.sessionPopupOpen) ? "#ffffffff" : "#ccffffff" }
 
@@ -315,13 +315,13 @@ Item {
             width: parent.width; height: 50 * s; y: 285 * s; spacing: 20 * s
             opacity: (root.sessionPopupOpen || root.userPopupOpen) ? 0.0 : 1.0
             Behavior on opacity { NumberAnimation { duration: 400 } }
-            Item { id: rebootBtn; x:0; y:0; width: (parent.width / 2) - 10 * s; height: 50 * s; layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#2a000000"; radius: 25*s; verticalOffset: 8 * s }
+            Item { id: rebootBtn; x:0; y:0; width: (parent.width / 2) - 10 * s; height: 50 * s; layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#35000000"; radius: 25*s; verticalOffset: 8 * s }
                 LiquidGlass { glassRadius: 18 * s; blurBrightness: restMouse.containsMouse ? 0.20 : 0.10; glassTint: "#30101a10"; topRimColor: "#ccffffff" }
                 Text { anchors.centerIn: parent; text: "REBOOT"; font.family: mainFont.name; font.pixelSize: 15 * s; font.weight: Font.DemiBold; color: "white"; opacity: restMouse.containsMouse ? 1.0 : 0.8 }
                 MouseArea { id: restMouse; anchors.fill: parent; hoverEnabled: true; onClicked: sddm.reboot(); cursorShape: Qt.PointingHandCursor; onPressed: rebootBtn.scale = 0.98; onReleased: rebootBtn.scale = 1.0 }
                 Behavior on scale { NumberAnimation { duration: 300; easing.type: Easing.OutBack } }
             }
-            Item { id: powerBtn; x:0; y:0; width: (parent.width / 2) - 10 * s; height: 50 * s; layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#2a000000"; radius: 25*s; verticalOffset: 8 * s }
+            Item { id: powerBtn; x:0; y:0; width: (parent.width / 2) - 10 * s; height: 50 * s; layer.enabled: true; layer.effect: DropShadow { transparentBorder: true; color: "#35000000"; radius: 25*s; verticalOffset: 8 * s }
                 LiquidGlass { glassRadius: 18 * s; blurBrightness: shutMouse.containsMouse ? 0.20 : 0.10; glassTint: "#30101a10"; topRimColor: "#ccffffff" }
                 Text { anchors.centerIn: parent; text: "POWER"; font.family: mainFont.name; font.pixelSize: 15 * s; font.weight: Font.DemiBold; color: "white"; opacity: shutMouse.containsMouse ? 1.0 : 0.8 }
                 MouseArea { id: shutMouse; anchors.fill: parent; hoverEnabled: true; onClicked: sddm.powerOff(); cursorShape: Qt.PointingHandCursor; onPressed: powerBtn.scale = 0.98; onReleased: powerBtn.scale = 1.0 }
