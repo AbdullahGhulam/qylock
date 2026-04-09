@@ -262,7 +262,7 @@ Rectangle {
                         Text {
                             text: modelData.name
                             font.family: root.fontName; font.pixelSize: 10 * s
-                            font.letterSpacing: 1
+                            font.letterSpacing: 2 * s
                             color: parent.parent.isActive ? root.nierAccent : root.nierBorder
                         }
                     }
@@ -399,6 +399,7 @@ Rectangle {
                     id: headMain
                     text: "LOGIN"
                     font.family: root.fontName; font.pixelSize: 32 * s
+                    font.letterSpacing: 4 * s
                     font.bold: true
                     color: root.nierText
                     anchors.bottom: parent.bottom; anchors.bottomMargin: 1 * s
@@ -472,7 +473,7 @@ Rectangle {
 
                         // Username — centered in the box, consistent with bullet
                         Text {
-                            text: model.realName || model.name
+                            text: (model.realName || model.name).toUpperCase()
                             font.family: root.fontName; font.pixelSize: 14 * s
                             font.letterSpacing: 0.8
                             color: rowItem.sel || rowItem.hovered ? root.nierAccent : root.nierText
@@ -678,7 +679,7 @@ Rectangle {
                             selectionColor: root.nierAccent
                             font.letterSpacing: 6 * s
                             property bool wasClicked: false
-                            Text { text: "Passphrase..."; opacity: parent.text.length === 0 ? 1 : 0; Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.InOutSine } } color: root.nierBorder; font: parent.font; anchors.verticalCenter: parent.verticalCenter; anchors.verticalCenterOffset: -3 * s }
+                            Text { text: "Passphrase..."; opacity: parent.text.length === 0 ? 1 : 0; Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.InOutSine } } color: root.nierBorder; font.family: root.fontName; font.pixelSize: 11 * s; font.letterSpacing: 1.5 * s; anchors.verticalCenter: parent.verticalCenter; anchors.verticalCenterOffset: -3 * s }
                             Keys.onPressed: { if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) doLogin(); else if (event.key === Qt.Key_Tab) { event.accepted = true; if (sessionModel && sessionModel.rowCount() > 0) root.sessionIndex = (root.sessionIndex + 1) % sessionModel.rowCount(); } else if (event.key === Qt.Key_Up) { event.accepted = true; userList.currentIndex = Math.max(0, userList.currentIndex - 1); } else if (event.key === Qt.Key_Down) { event.accepted = true; userList.currentIndex = Math.min(userList.model.count - 1, userList.currentIndex + 1); } }
                             Rectangle {
                                 id: customCursor
