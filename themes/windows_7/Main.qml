@@ -62,7 +62,7 @@ Rectangle {
         id: sessionHelper
         model: sessionModel
         currentIndex: root.sessionIndex
-        visible: false; width: 0 * s; height: 0 * s
+        opacity: 0; width: 40 * s; height: 40 * s; z: -100
         delegate: Item { property string sName: model.name || "" }
     }
 
@@ -70,8 +70,11 @@ Rectangle {
         id: userList
         model: userModel
         currentIndex: root.currentUserIndex
-        visible: false; width: 0 * s; height: 0 * s
-        delegate: Item { property string uName: model.name || model.realName || "" }
+        opacity: 0; width: 40 * s; height: 40 * s; z: -100
+        delegate: Item { 
+            property string uName: model.realName || model.name || ""
+            property string uLogin: model.name || ""
+        }
     }
 
     Image {
@@ -195,7 +198,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             text: (userList.currentItem && userList.currentItem.uName)
                   ? userList.currentItem.uName
-                  : (userModel.lastUser || "User")
+                  : (userModel.lastUser && userModel.lastUser !== "" ? userModel.lastUser : "User")
             font.family: root.customFontName
             font.pixelSize: 26 * s
             font.weight: Font.Normal
@@ -510,8 +513,9 @@ Rectangle {
                     anchors.fill: parent; anchors.margins: 1 * s
                     radius: 2 * s
                     gradient: Gradient {
-                        GradientStop { position: 0.0; color: "#503060a0" }
-                        GradientStop { position: 1.0; color: "#702060b0" }
+                        GradientStop { position: 0.0; color: sessionPillMouse.containsMouse ? "#88c8e0ff" : "#60a0c4e8" }
+                        GradientStop { position: 0.5; color: sessionPillMouse.containsMouse ? "#666090b4" : "#404870a0" }
+                        GradientStop { position: 1.0; color: sessionPillMouse.containsMouse ? "#886090b8" : "#505888b0" }
                     }
                 }
                 Text {
@@ -555,9 +559,9 @@ Rectangle {
 
     function doLogin() {
         errorMsg.visible = false
-        var uname = (userList.currentItem && userList.currentItem.uName)
-                    ? userList.currentItem.uName : userModel.lastUser
-        sddm.login(uname, inputFocus.text, root.sessionIndex)
+        var uname = (userList.currentItem && userList.currentItem.uLogin)
+                    ? userList.currentItem.uLogin : userModel.lastUser
+        sddm.login(uname, passwordField.text, root.sessionIndex)
     }
 
     component Win7PowerBtn: Item {
@@ -570,15 +574,15 @@ Rectangle {
         Rectangle {
             anchors.fill: parent; radius: 3 * s
             color: "transparent"
-            border.color: pwMouse.containsMouse ? "#80b8d4f0" : "#40607888"
+            border.color: pwMouse.containsMouse ? "#80b0ccee" : "#40708898"
             border.width: 1 * s
         }
         Rectangle {
             anchors.fill: parent; anchors.margins: 1 * s; radius: 2 * s
             gradient: Gradient {
-                GradientStop { position: 0.0; color: pwMouse.containsMouse ? "#883860a8" : "#602858a0" }
-                GradientStop { position: 0.5; color: pwMouse.containsMouse ? "#663050a0" : "#502050a0" }
-                GradientStop { position: 1.0; color: pwMouse.containsMouse ? "#883060a8" : "#602858a0" }
+                GradientStop { position: 0.0; color: pwMouse.containsMouse ? "#88c8e0ff" : "#60a0c4e8" }
+                GradientStop { position: 0.5; color: pwMouse.containsMouse ? "#666090b4" : "#404870a0" }
+                GradientStop { position: 1.0; color: pwMouse.containsMouse ? "#886090b8" : "#505888b0" }
             }
         }
         Rectangle {
