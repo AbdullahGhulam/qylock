@@ -4,7 +4,7 @@ import Qt5Compat.GraphicalEffects
 import Qt.labs.folderlistmodel
 import SddmComponents 2.0
 
-// Munchax Layout
+// Munchlax Layout
 Rectangle {
     readonly property real s: Screen.height / 768
     id: root; width: Screen.width; height: Screen.height; color: "#25787d"
@@ -19,10 +19,10 @@ Rectangle {
 
     FolderListModel { id: fontFolder; folder: Qt.resolvedUrl("font"); nameFilters: ["*.ttf", "*.otf"] }
     FontLoader { id: pf; source: fontFolder.count > 0 ? "font/" + fontFolder.get(0, "fileName") : "" }
-    
+
     ListView { id: sessionHelper; model: sessionModel; currentIndex: root.sessionIndex; opacity: 0; width: 100; height: 100; z: -100; delegate: Item { property string sName: model.name || "" } }
     ListView { id: userHelper; model: userModel; currentIndex: root.userIndex; opacity: 0; width: 100; height: 100; z: -100; delegate: Item { property string uName: model.realName || model.name || ""; property string uLogin: model.name || "" } }
-    
+
     // Auto-focus fix for Quickshell (Loader does not propagate focus: true)
     Timer { interval: 300; running: true; onTriggered: pwd.forceActiveFocus() }
 
@@ -42,7 +42,7 @@ Rectangle {
     Column {
         anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 60 * s
         spacing: 4 * s; opacity: root.ui
-        
+
         Item {
             anchors.right: parent.right
             width: cd.implicitWidth; height: cd.implicitHeight
@@ -71,7 +71,7 @@ Rectangle {
     Item {
         anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.margins: 60 * s
         width: 300 * s; height: 160 * s; opacity: root.ui
-        
+
         Column {
             anchors.bottom: parent.bottom; anchors.left: parent.left; spacing: 20 * s; width: 280 * s
 
@@ -86,7 +86,7 @@ Rectangle {
                 }
                 MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: { if (userModel && userModel.rowCount() > 0) root.userIndex = (root.userIndex + 1) % userModel.rowCount() } }
             }
-            
+
             Item {
                 width: parent.width; height: 36 * s
                 Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; width: parent.width; height: 1 * s; color: root.mTeal; opacity: pwd.activeFocus ? 1.0 : 0.3; Behavior on opacity { NumberAnimation {duration: 300} } }
@@ -102,7 +102,7 @@ Rectangle {
                     onActiveFocusChanged: if (!activeFocus && text.length === 0) wasClicked = false
                     Keys.onReturnPressed: doLogin(); Keys.onEnterPressed: doLogin()
                 }
-                Text { 
+                Text {
                     anchors.verticalCenter: parent.verticalCenter; anchors.left: parent.left; text: "password"; color: root.mTeal; font.family: pf.name; font.pixelSize: 14 * s; font.letterSpacing: 4 * s
                     opacity: pwd.text.length === 0 ? 0.4 : 0
                     Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.InOutSine } }
@@ -158,6 +158,6 @@ Rectangle {
         target: sddm
         function onLoginFailed() { err.text = "DECLINED"; pwd.text = ""; pwd.focus = true }
     }
-    
+
     function doLogin() { var u = (userHelper.currentItem && userHelper.currentItem.uLogin) ? userHelper.currentItem.uLogin : userModel.lastUser; sddm.login(u, pwd.text, root.sessionIndex) }
 }
