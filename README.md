@@ -189,6 +189,16 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
     </tr>
     <tr>
       <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>Dog Samurai</b><br><br>
+        <img src="./Assets/dog_samurai.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
+        <b>The Last of Us</b><br><br>
+        <img src="./Assets/the_last_of_us.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%" style="padding: 15px; border: none;">
         <b>Honkai: Star Rail</b><br><br>
         <img src="./Assets/star_rail.gif" width="100%" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"/>
       </td>
