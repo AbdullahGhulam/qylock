@@ -431,12 +431,11 @@ Rectangle {
             Item {
                 width: 700 * s; height: 160 * s
                 z: 110
-                Image {
-                    id: logoImage
-                    source: "terraria_logo.png"
-                    width: 440 * s; fillMode: Image.PreserveAspectFit
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
+                
+                Item {
+                    id: logoWrapper
+                    width: 440 * s; height: width * (logoImage.implicitHeight / logoImage.implicitWidth)
+                    anchors.centerIn: parent
                     
                     transformOrigin: Item.Center
                     SequentialAnimation on scale {
@@ -450,13 +449,20 @@ Rectangle {
                         NumberAnimation { from: 1.5; to: -1.5; duration: 3500; easing.type: Easing.InOutSine }
                     }
 
-                    // Subtle shadow to add depth while keeping it 'light'
                     DropShadow {
-                        anchors.fill: parent
+                        anchors.fill: logoImage
                         transparentBorder: true
-                        horizontalOffset: 2; verticalOffset: 2
-                        radius: 5 * s; samples: 10; color: Qt.rgba(0,0,0,0.6)
+                        horizontalOffset: 2 * s; verticalOffset: 3 * s
+                        radius: 8 * s; samples: 16; color: "#aa000000"
                         source: logoImage
+                        z: -1 // Ensure shadow is behind the logo
+                    }
+
+                    Image {
+                        id: logoImage
+                        source: "terraria_logo.png"
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
                     }
                 }
             }
