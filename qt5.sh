@@ -44,5 +44,11 @@ find themes-qt5 -name "*.qml" -type f | while read -r file; do
 
 done
 
+# 5. Update metadata.desktop to use Qt5
+echo "Updating metadata.desktop files..."
+find themes-qt5 -name "metadata.desktop" -type f | while read -r file; do
+    sed -i 's/QtVersion=6/QtVersion=5/g' "$file"
+done
+
 echo "✅ Done! All themes in 'themes-qt5' updated."
 echo "🚀 You can now run ./sddm.sh to set your theme!"
