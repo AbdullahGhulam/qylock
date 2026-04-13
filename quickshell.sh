@@ -175,6 +175,31 @@ if [ "$THEME_NAME" == "Genshin" ]; then
     esac
 fi
 
+if [ "$THEME_NAME" == "clockwork" ]; then
+    info "Customizing Clockwork Theme"
+    
+    # Theme Mode
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Dark Mode (Default)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Light Mode"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice [1/2]: ${C_RESET}"
+    read -rp "" MODE_S
+    
+    if [ "$MODE_S" == "2" ]; then
+        sed -i "s/^themeMode=.*/themeMode=light/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    else
+        sed -i "s/^themeMode=.*/themeMode=dark/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    fi
+    
+    # Windup Animation
+    echo -ne "${C_MAIN}${C_BOLD} │  ${C_YELLOW}Enable windup animation? (y/n): ${C_RESET}"
+    read -rp "" WIND_S
+    if [[ "$WIND_S" =~ ^[Nn]$ ]]; then
+        sed -i "s/^enableWindup=.*/enableWindup=false/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    else
+        sed -i "s/^enableWindup=.*/enableWindup=true/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    fi
+fi
+
 # Check for fonts in the selected theme
 FONT_COUNT=$(ls -1 "$THEMES_DIR/$THEME_NAME/font" 2>/dev/null | grep -E "\.(ttf|otf)$" | wc -l)
 if [ "$FONT_COUNT" -eq 0 ]; then

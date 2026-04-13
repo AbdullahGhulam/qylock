@@ -202,6 +202,38 @@ if [ "$SELECTED_THEME" == "Genshin" ]; then
     esac
 fi
 
+# Clockwork Theme
+if [ "$SELECTED_THEME" == "clockwork" ]; then
+    info "Customizing Clockwork sub-theme..."
+    
+    # Theme Mode
+    substep "Select theme mode:"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Dark Mode (Default)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Light Mode"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice: ${C_RESET}"
+    read -rp "" MODE_S
+    
+    if [ "$MODE_S" == "2" ]; then
+        sed -i "s/^themeMode=.*/themeMode=light/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Light mode activated!"
+    else
+        sed -i "s/^themeMode=.*/themeMode=dark/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Dark mode activated!"
+    fi
+    
+    # Windup Animation
+    substep "Enable windup animation? (y/n):"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice: ${C_RESET}"
+    read -rp "" WIND_S
+    if [[ "$WIND_S" =~ ^[Nn]$ ]]; then
+        sed -i "s/^enableWindup=.*/enableWindup=false/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Windup animation disabled."
+    else
+        sed -i "s/^enableWindup=.*/enableWindup=true/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Windup animation enabled."
+    fi
+fi
+
 if [ -z "$SELECTED_THEME" ]; then
     error "No theme selected. Exiting."
     exit 0
