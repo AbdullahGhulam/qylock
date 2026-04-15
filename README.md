@@ -64,6 +64,7 @@ Some themes rely on fonts that cannot be bundled here (copyright issues). Downlo
 | Sword | The Last Shuriken | `The Last Shuriken.ttf` |
 | Minecraft | Minecraft Regular | `minecraft.ttf` |
 | Honkai: Star Rail | DIN Next | `font.ttf` |
+| osu! | Torus Regular | `Torus Regular.otf` |
 
 </details>
 
@@ -354,8 +355,9 @@ Huge thanks to all the amazing artists for these wallpapers and fonts! Here's wh
 | **Pixel · Rainy Room** | [MoeWalls](https://moewalls.com/pixel-art/pixel-room-rainy-night-live-wallpaper/) | Pixelify Sans | **Minecraft** | [Minecraft Wiki](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fminecraft.fandom.com%2Fwiki%2FBackground&ved=0CBkQjhxqFwoTCIC45qWs4pMDFQAAAAAdAAAAABAH&opi=89978449) | Minecraft |
 | **Pixel · Skyscrapers** | [WallsFlow](https://wallsflow.com/live-wallpapers/pixel-art/61-pixel-city.html) | Pixelify Sans | **NieR: Automata** | [Reddit](https://www.reddit.com/r/nier/comments/7nqcy7/the_final_nier_automata_title_screen_made_into/) | FOT-Rodin Pro DB |
 | **Enfield** | [WallsFlow](https://wallsflow.com/live-wallpapers/games/777-arknights-endfield-sakura-sanctuary-live-wallpaper.html) | Orbitron | **Terraria** | [Terraria Forums](https://forums.terraria.org/index.php?threads/terraria-desktop-wallpapers.12644/) | Andy Bold |
-| **Sword** | [WallsFlow](https://wallsflow.com/live-wallpapers/anime/761-silent-katana-forest-samurai-live-wallpaper.html) | The Last Shuriken | **Ninja Gaiden** | [Noisy Pixel](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fnoisypixel.net%2Fninja-gaiden-4-wallpapers-art-team%2F&ved=0CBkQjhxqFwoTCIDa2e6r4pMDFQAAAAAdAAAAABAI&opi=89978449) | Tektur |
-| **Forest** | [MoeWalls](https://moewalls.com/landscape/in-the-early-morning-forest-live-wallpaper/) | Figtree | **Windows 7** | [WallpaperAccess](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwallpaperaccess.com%2Fwindows-7-lock-screen&ved=0CBkQjhxqFwoTCKDbh-Or4pMDFQAAAAAdAAAAABAH&opi=89978449) | Segoe UI |
+| **Sword** | [WallsFlow](https://wallsflow.com/live-wallpapers/anime/761-silent-katana-forest-samurai-live-wallpaper.html) | The Last Shuriken | **osu!** | [Official](https://osu.ppy.sh) | Torus Regular |
+| **Forest** | [MoeWalls](https://moewalls.com/landscape/in-the-early-morning-forest-live-wallpaper/) | Figtree | **Ninja Gaiden** | [Noisy Pixel](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fnoisypixel.net%2Fninja-gaiden-4-wallpapers-art-team%2F&ved=0CBkQjhxqFwoTCIDa2e6r4pMDFQAAAAAdAAAAABAI&opi=89978449) | Tektur |
+| **Winter** | [MoeWalls](https://moewalls.com/landscape/winter-forest-snow-live-wallpaper/) | Orbitron | **Windows 7** | [WallpaperAccess](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwallpaperaccess.com%2Fwindows-7-lock-screen&ved=0CBkQjhxqFwoTCKDbh-Or4pMDFQAAAAAdAAAAABAH&opi=89978449) | Segoe UI |
 
 <br>
 
