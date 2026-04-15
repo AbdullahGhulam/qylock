@@ -200,6 +200,19 @@ if [ "$THEME_NAME" == "clockwork" ]; then
     fi
 fi
 
+if [ "$THEME_NAME" == "osu" ]; then
+    info "Customizing Osu! theme..."
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Main menu only  (direct password login)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Main menu + rhythm game gate  (default)"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice [1/2]: ${C_RESET}"
+    read -rp "" OSU_OPT
+    if [ "$OSU_OPT" == "1" ]; then
+        sed -i "s/^gameMode=.*/gameMode=menu/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    else
+        sed -i "s/^gameMode=.*/gameMode=game/" "$THEMES_DIR/$THEME_NAME/theme.conf"
+    fi
+fi
+
 # Check for fonts in the selected theme
 FONT_COUNT=$(ls -1 "$THEMES_DIR/$THEME_NAME/font" 2>/dev/null | grep -E "\.(ttf|otf)$" | wc -l)
 if [ "$FONT_COUNT" -eq 0 ]; then

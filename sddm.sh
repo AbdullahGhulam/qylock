@@ -234,6 +234,23 @@ if [ "$SELECTED_THEME" == "clockwork" ]; then
     fi
 fi
 
+# Osu Theme
+if [ "$SELECTED_THEME" == "osu" ]; then
+    info "Customizing Osu! theme..."
+    substep "Select login mode:"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}1 ${C_DIM}❯ ${C_RESET}Main menu only  (direct password login)"
+    echo -e "${C_MAIN}${C_BOLD} │  ${C_ACCENT}2 ${C_DIM}❯ ${C_RESET}Main menu + rhythm game gate  (default)"
+    echo -ne "${C_MAIN}${C_BOLD} ╰─ ${C_YELLOW}Choice [1/2]: ${C_RESET}"
+    read -rp "" OSU_OPT
+    if [ "$OSU_OPT" == "1" ]; then
+        sed -i "s/^gameMode=.*/gameMode=menu/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Direct login mode activated!"
+    else
+        sed -i "s/^gameMode=.*/gameMode=game/" "$THEMES_DIR/$SELECTED_THEME/theme.conf"
+        substep "Rhythm game gate activated!"
+    fi
+fi
+
 if [ -z "$SELECTED_THEME" ]; then
     error "No theme selected. Exiting."
     exit 0
