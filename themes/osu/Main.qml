@@ -1034,11 +1034,22 @@ Rectangle {
                 lifeTimer.stop()
                 hc.hitSignal(j)
 
-                circleBody.opacity = 0; approachRing.opacity = 0
+                // Fade & Scale
+                approachRing.opacity = 0
+                circleAnim.start()
+                
                 hitBurst.opacity = 1; hitBurst.scale = 1.0
                 burstScale.restart(); burstOpacity.restart()
                 
                 return true
+            }
+
+            SequentialAnimation {
+                id: circleAnim
+                ParallelAnimation {
+                    NumberAnimation { target: circleBody; property: "scale"; to: 1.4; duration: 240; easing.type: Easing.OutQuad }
+                    NumberAnimation { target: circleBody; property: "opacity"; to: 0.0; duration: 240; easing.type: Easing.OutQuad }
+                }
             }
         }
     }
@@ -1053,6 +1064,7 @@ Rectangle {
             property real approachDuration: lifetime
             property real sx: 0; property real sy: 0
             property real ex: 0; property real ey: 0
+            property real cpx: 0; property real cpy: 0 // Bezier Control
             property real slideDuration: 800
             property real spawnTime: 0
 
@@ -1065,50 +1077,67 @@ Rectangle {
             signal missSignal()
             signal sliderCompleted()
 
-            width: 80 * s; height: 80 * s
-            x: sx - 40*s; y: sy - 40*s
+            // Full Gamearea
+            x: 0; y: 0
+            width: parent ? parent.width : 0
+            height: parent ? parent.height : 0
 
-            property real destX: ex - sx
-            property real destY: ey - sy
             property real ballProgress: 0
 
-            // Slider Track
-            Rectangle {
-                id: track
-                x: 0; y: 40*s - height/2
-                height: 80*s; width: 40*s + Math.sqrt(destX*destX + destY*destY)
-                radius: height/2
-                color: Qt.rgba(0.02, 0.02, 0.02, 0.85) // Dark Body
-                border.color: root.accentColor
-                border.width: 3.5 * s
-                
-                opacity: (!completed && !missed) ? 0.9 : 0
+            // Bezier Position
+            function bez(t, p0, p1, p2) { var m = 1-t; return m*m*p0 + 2*m*t*p1 + t*t*p2 }
+            property real ballX: bez(ballProgress, sx, cpx, ex)
+            property real ballY: bez(ballProgress, sy, cpy, ey)
+
+            // Bezier Canvas
+            Canvas {
+                id: sliderCanvas
+                anchors.fill: parent
+                opacity: (!completed && !missed) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 150 } }
 
-                // Rotation Pivot
-                transform: Rotation {
-                    origin.x: 40*s; origin.y: 40*s
-                    angle: Math.atan2(destY, destX) * 180 / Math.PI
+                onPaint: {
+                    var ctx = getContext("2d")
+                    ctx.clearRect(0, 0, width, height)
+
+                    // Accent Border
+                    ctx.beginPath()
+                    ctx.moveTo(sx, sy)
+                    ctx.quadraticCurveTo(cpx, cpy, ex, ey)
+                    ctx.lineWidth  = 80 * s
+                    ctx.lineCap    = "round"
+                    ctx.lineJoin   = "round"
+                    ctx.strokeStyle = Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.9)
+                    ctx.stroke()
+
+                    // Dark Body
+                    ctx.beginPath()
+                    ctx.moveTo(sx, sy)
+                    ctx.quadraticCurveTo(cpx, cpy, ex, ey)
+                    ctx.lineWidth   = 68 * s
+                    ctx.lineCap     = "round"
+                    ctx.lineJoin    = "round"
+                    ctx.strokeStyle = "rgba(5,5,5,0.9)"
+                    ctx.stroke()
+
+                    // Inner Sheen
+                    ctx.beginPath()
+                    ctx.moveTo(sx, sy)
+                    ctx.quadraticCurveTo(cpx, cpy, ex, ey)
+                    ctx.lineWidth   = 58 * s
+                    ctx.lineCap     = "round"
+                    ctx.lineJoin    = "round"
+                    ctx.strokeStyle = "rgba(255,255,255,0.04)"
+                    ctx.stroke()
                 }
 
-                // Tubular Shading
-                Rectangle {
-                    anchors.fill: parent; anchors.margins: 5*s; radius: height/2
-                    color: "transparent"; border.color: Qt.rgba(1,1,1,0.08); border.width: 1.5*s
-                    gradient: Gradient {
-                        orientation: Gradient.Vertical
-                        GradientStop { position: 0.0; color: Qt.rgba(1,1,1, 0.15) }
-                        GradientStop { position: 0.4; color: "transparent" }
-                        GradientStop { position: 0.6; color: "transparent" }
-                        GradientStop { position: 1.0; color: Qt.rgba(0,0,0, 0.25) }
-                    }
-                }
+                Component.onCompleted: requestPaint()
             }
 
             // Approach Ring
             Rectangle {
                 id: sliderApproach
-                anchors.centerIn: sBody
+                x: sx - width/2; y: sy - height/2
                 width: 240*s; height: 240*s; radius: 120*s; color: "transparent"
                 border.color: root.accentColor; border.width: 3.5*s
                 opacity: (hit || missed) ? 0 : 1
@@ -1119,9 +1148,11 @@ Rectangle {
             // Head Circle
             Item {
                 id: sBody
-                anchors.fill: parent; opacity: hit ? 0 : 1
+                x: sx - 40*s; y: sy - 40*s
+                width: 80*s; height: 80*s
+                opacity: hit ? 0 : 1
                 Behavior on opacity { NumberAnimation { duration: 100 } }
-                
+
                 // Circle Fill
                 Rectangle {
                     anchors.fill: parent; radius: width / 2
@@ -1139,21 +1170,19 @@ Rectangle {
                 }
                 // Tiny Outline
                 Rectangle { anchors.centerIn: parent; width: parent.width - 7*s; height: width; radius: width / 2; color: "transparent"; border.color: Qt.rgba(0,0,0,0.3); border.width: 1*s }
-                
+
                 Text { anchors.centerIn: parent; text: circleNum; color: "white"; font.family: mainFont.name; font.pixelSize: 34*s; font.weight: Font.Black; layer.enabled: true; layer.effect: DropShadow { color: "#66000000"; radius: 5; samples: 9; verticalOffset: 1.5*s } }
             }
 
-
-
-            // Slider ball — sleek modern design
+            // Slider Ball
             Item {
                 id: sBall
                 width: 76*s; height: 76*s
                 opacity: sliding ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 80 } }
 
-                x: ballProgress * destX + 2*s
-                y: ballProgress * destY + 2*s
+                x: sliderRoot.ballX - 38*s
+                y: sliderRoot.ballY - 38*s
 
                 // Ball Body
                 Rectangle {
@@ -1194,14 +1223,20 @@ Rectangle {
             // Travel Animation
             SequentialAnimation {
                 id: ballTravelAnim
-                running: true
-                PauseAnimation { duration: approachDuration }
+                running: false
+                
                 ScriptAction { script: { sliding = true } }
                 NumberAnimation {
                     target: sliderRoot; property: "ballProgress"
                     from: 0; to: 1; duration: slideDuration; easing.type: Easing.Linear
                 }
                 ScriptAction { script: { if (sliderRoot.ballProgress >= 0.99 && !sliderRoot.missed) sliderRoot.finish() } }
+            }
+
+            // Delayed Start
+            Timer {
+                id: ballDelayTimer
+                onTriggered: ballTravelAnim.start()
             }
 
             // Head Miss
@@ -1221,9 +1256,9 @@ Rectangle {
                 onTriggered: {
                     if (!hit) return
                     if (!gameArea.isActionHeld) { fail(); return }
-                    
-                    var bx = sliderRoot.x + sBall.x + 40*s
-                    var by = sliderRoot.y + sBall.y + 40*s
+
+                    var bx = sliderRoot.ballX
+                    var by = sliderRoot.ballY
                     var mx = gameArea.mouseXPos - bx
                     var my = gameArea.mouseYPos - by
                     var followRadius = 200 * s // Leniency Radius
@@ -1240,6 +1275,11 @@ Rectangle {
                 hit = true
                 headMissTimer.stop()
                 
+                // Start Movement
+                var remain = Math.max(0, (spawnTime + approachDuration) - Date.now())
+                ballDelayTimer.interval = remain
+                ballDelayTimer.start()
+                
                 var j = 0
                 if      (delta <= root.hitWindow300) j = 300
                 else if (delta <= root.hitWindow100) j = 100
@@ -1249,8 +1289,29 @@ Rectangle {
                 return true
             }
 
-            function fail()   { ballTravelAnim.stop(); sliding = false; missed = true; missSignal(); Qt.callLater(destroy) }
-            function finish() { if (!missed && sliding) { ballTravelAnim.stop(); sliding = false; completed = true; sliderCompleted(); Qt.callLater(destroy) } }
+            function fail()   { 
+                ballTravelAnim.stop(); 
+                sliding = false; 
+                missed = true; 
+                missSignal(); 
+                deathAnim.start() 
+            }
+            function finish() { 
+                if (!missed && sliding) { 
+                    ballTravelAnim.stop(); 
+                    sliding = false; 
+                    completed = true; 
+                    sliderCompleted(); 
+                    deathAnim.start() 
+                } 
+            }
+
+            // Exit Animation
+            SequentialAnimation {
+                id: deathAnim
+                NumberAnimation { target: sliderRoot; property: "opacity"; to: 0; duration: 200 }
+                ScriptAction { script: sliderRoot.destroy() }
+            }
         }
     }
 
@@ -1430,8 +1491,26 @@ Rectangle {
             var ey       = Math.max(80*s,  Math.min(root.height - 100*s,  cy + sdy))
             var slideDur = Math.max(250, Math.min(800, dist / s / settings.osuSpeed * 2.2))
 
+            // Bezier Control Point
+            var mdx = (cx + ex) / 2, mdy = (cy + ey) / 2
+            var ldx = ex - cx, ldy = ey - cy
+            var chordLen = Math.sqrt(ldx*ldx + ldy*ldy) || 1
+            var perpX = -ldy / chordLen, perpY = ldx / chordLen
+            var curveMag = (Math.random() - 0.5) * 2 * dist * 0.7
+            var cpx = mdx + perpX * curveMag
+            var cpy = mdy + perpY * curveMag
+            cpx = Math.max(margin, Math.min(root.width  - margin, cpx))
+            cpy = Math.max(80*s,   Math.min(root.height - 100*s,  cpy))
+
+            // Arc Length Approx
+            var d1 = Math.sqrt((cpx-cx)*(cpx-cx) + (cpy-cy)*(cpy-cy))
+            var d2 = Math.sqrt((ex-cpx)*(ex-cpx) + (ey-cpy)*(ey-cpy))
+            var arcLen = (chordLen + d1 + d2) / 2
+            var slideDur = Math.max(250, Math.min(1000, arcLen / s / settings.osuSpeed * 2.2))
+
             circle = sliderComp.createObject(gameArea, {
                 sx: cx, sy: cy, ex: ex, ey: ey,
+                cpx: cpx, cpy: cpy,
                 circleNum: root.osuCircleCount,
                 lifetime: lifetime + slideDur,
                 approachDuration: lifetime,
@@ -1451,21 +1530,26 @@ Rectangle {
             root.activeCircles.push(circle)
 
             circle.hitSignal.connect(function(judgment) {
-                onCircleHit(judgment, circle.x + 40*s, circle.y + 40*s)
+                var hitX = isSlider ? circle.sx : (circle.x + 40*s)
+                var hitY = isSlider ? circle.sy : (circle.y + 40*s)
+                onCircleHit(judgment, hitX, hitY)
                 var idx = root.activeCircles.indexOf(circle)
-                if (idx >= 0) root.activeCircles.splice(idx, 1)
+                if (idx >= 0 && !isSlider) root.activeCircles.splice(idx, 1) // Keep slider tracked
             })
 
             circle.missSignal.connect(function() {
-                onCircleMiss(circle.x + 40*s, circle.y + 40*s)
+                var missX = isSlider ? circle.sx : (circle.x + 40*s)
+                var missY = isSlider ? circle.sy : (circle.y + 40*s)
+                onCircleMiss(missX, missY)
                 var idx = root.activeCircles.indexOf(circle)
                 if (idx >= 0) root.activeCircles.splice(idx, 1)
             })
 
             if (isSlider) {
                 circle.sliderCompleted.connect(function() {
-                    // Slider Judgment
-                    onCircleHit(300, circle.sx + circle.destX, circle.sy + circle.destY)
+                    onCircleHit(300, circle.ex, circle.ey)
+                    var idx = root.activeCircles.indexOf(circle)
+                    if (idx >= 0) root.activeCircles.splice(idx, 1)
                 })
             }
         }
@@ -1575,28 +1659,23 @@ Rectangle {
     }
 
     function tryHitAt(hx, hy) {
-        var hitTolerance = 52 * s;
+        var hitTolerance = 64 * s;
         for (var i = 0; i < root.activeCircles.length; i++) {
             var c = root.activeCircles[i];
             if (!c.hit && !c.missed) {
-                var dx = (c.x + 40*s) - hx;
-                var dy = (c.y + 40*s) - hy;
+                // Target Center Logic
+                var tx = (typeof c.sx !== "undefined") ? c.sx : (c.x + 40*s);
+                var ty = (typeof c.sy !== "undefined") ? c.sy : (c.y + 40*s);
+                
+                var dx = tx - hx;
+                var dy = ty - hy;
                 if (dx*dx + dy*dy < hitTolerance * hitTolerance) {
-                    var clickAccepted = true;
+                    var clickAccepted = false;
                     if (typeof c.tryHit === "function") {
                         clickAccepted = c.tryHit();
-                    } else {
-                        c.hit = true;
-                        onCircleHit(300, c.x + 40*s, c.y + 40*s);
-                        c.opacity = 0;
-                        Qt.callLater(function() { c.destroy(); });
                     }
                     
-                    if (clickAccepted) {
-                        var idx = root.activeCircles.indexOf(c);
-                        if (idx >= 0) root.activeCircles.splice(idx, 1);
-                        return;
-                    }
+                    if (clickAccepted) return; // Note Handled
                 }
             }
         }
