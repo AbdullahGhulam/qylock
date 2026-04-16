@@ -143,7 +143,7 @@ Point your Window Manager keybind (e.g., in Hyprland, Qtile, Sway, or i3) direct
 #### ⌨️ Virtual Keyboard popping up?
 If the virtual keyboard keeps opening on its own at startup, you can disable it in your SDDM config:
 
-1. Open `/etc/sddm.conf` as root.
+1. Open `/etc/sddm.conf.d/virtualkeyboard.conf` as root.
 2. Under the `[General]` section, set `InputMethod` to empty:
 
 ```ini
