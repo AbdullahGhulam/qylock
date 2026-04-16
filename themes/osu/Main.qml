@@ -253,7 +253,7 @@ Rectangle {
     Item {
         id: loginScreen
         anchors.fill: parent
-        opacity: root.gameActive ? 0 : root.uiOpacity
+        opacity: (root.gameActive || root.loginSuccess) ? 0 : root.uiOpacity
         visible: opacity > 0.01
         Behavior on opacity { NumberAnimation { duration: 600; easing.type: Easing.OutQuint } }
 
