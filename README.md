@@ -377,7 +377,7 @@ Huge thanks to all the amazing artists for these wallpapers and fonts! Here's wh
 <br>
 
 ### 🛠️ SPECIAL THANKS
-**Pumphium**, **kaizky**
+**Pumphium**, **kaizky**, **DragonChicken**
 
 </div>
 <br>
