@@ -44,16 +44,16 @@ Rectangle {
     Connections {
         target: sddm
         function onLoginSucceeded() {
-            statusLabel.text   = "Welcome"
-            statusLabel.color  = "#a0e0a0"
-            errorMsg.visible   = false
+            statusLabel.text  = "Welcome"
+            statusLabel.color = "#a0e0a0"
+            errorMsg.opacity  = 0
         }
         function onLoginFailed() {
-            statusLabel.text   = "Locked"
-            statusLabel.color  = "#c8dce8"
-            errorMsg.text      = "The password is incorrect. Please try again."
-            errorMsg.visible   = true
-            passwordField.text = ""
+            statusLabel.text  = "Locked"
+            statusLabel.color = "#c8dce8"
+            errorMsg.text     = "The password is incorrect. Please try again."
+            errorMsg.opacity  = 1
+            inputFocus.text   = ""
             shakeAnim.start()
         }
     }
@@ -377,7 +377,8 @@ Rectangle {
             id: errorMsg
             anchors.horizontalCenter: parent.horizontalCenter
             text: ""
-            opacity: 0; z: -100
+            opacity: 0
+            Behavior on opacity { NumberAnimation { duration: 300 } }
             font.family: root.customFontName
             font.pixelSize: 12 * s
             color: "#ffddaa"
@@ -561,7 +562,7 @@ Rectangle {
         errorMsg.visible = false
         var uname = (userList.currentItem && userList.currentItem.uLogin)
                     ? userList.currentItem.uLogin : userModel.lastUser
-        sddm.login(uname, passwordField.text, root.sessionIndex)
+        sddm.login(uname, inputFocus.text, root.sessionIndex)
     }
 
     component Win7PowerBtn: Item {

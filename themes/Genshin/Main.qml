@@ -12,9 +12,18 @@ Rectangle {
     height: Screen.height
     color: "#050a15"
     focus: true
-    Keys.onPressed: {
-        if (!loginFormVisible && (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)) {
+    Keys.onReturnPressed: (event) => {
+        if (!loginFormVisible) {
             loginFormVisible = true
+            passIn.forceActiveFocus()
+            event.accepted = true
+        }
+    }
+    Keys.onEnterPressed: (event) => {
+        if (!loginFormVisible) {
+            loginFormVisible = true
+            passIn.forceActiveFocus()
+            event.accepted = true
         }
     }
 
@@ -24,6 +33,7 @@ Rectangle {
     property string activeUser: (userHelper.currentItem && userHelper.currentItem.uName) ? userHelper.currentItem.uName : userModel.lastUser
     property bool sessionPopupOpen: false
     property bool loginFormVisible: false
+    readonly property string activeUserLogin: (userHelper.currentItem && userHelper.currentItem.uLogin) ? userHelper.currentItem.uLogin : userModel.lastUser
 
     readonly property string bgMode: config.background_mode || "time"
     readonly property string bgVideo: {
@@ -272,12 +282,9 @@ Rectangle {
                                 }
                             }
                             MouseArea { anchors.fill: parent; onClicked: { passIn.forceActiveFocus(); passIn.wasClicked = true } }
-                            Keys.onPressed: {
-                                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                    var uname = (userHelper.currentItem && userHelper.currentItem.uLogin) ? userHelper.currentItem.uLogin : userModel.lastUser
-                                    sddm.login(uname, passIn.text, root.sessionIndex)
-                                }
-                            }
+                            Keys.enabled: loginFormVisible
+                            Keys.onReturnPressed: if (loginFormVisible) sddm.login(activeUserLogin, passIn.text, root.sessionIndex)
+                            Keys.onEnterPressed: if (loginFormVisible) sddm.login(activeUserLogin, passIn.text, root.sessionIndex)
                         }
                     }
 

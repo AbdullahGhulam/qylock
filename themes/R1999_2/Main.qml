@@ -180,7 +180,9 @@ Item {
                         echoMode: TextInput.Password; passwordCharacter: "✦"; font.family: titleFont.name; font.pixelSize: 32 * s; font.letterSpacing: 15 * s; color: root.fg
                         selectionColor: root.gold
                         cursorVisible: false; cursorDelegate: Item { width: 0; height: 0 }
-                        onAccepted: root.login()
+                        onAccepted: if (root.interactionMode) root.login()
+                        Keys.onReturnPressed: (event) => { if (root.interactionMode) { root.login(); event.accepted = true } }
+                        Keys.onEnterPressed: (event) => { if (root.interactionMode) { root.login(); event.accepted = true } }
                         onActiveFocusChanged: { if (!activeFocus && text.length === 0) { root.interactionMode = false; wasClicked = false } }
                         property bool wasClicked: false
                         
@@ -318,5 +320,24 @@ Item {
     }
 
     focus: true
-    Keys.onPressed: (event) => { if (!root.interactionMode) { if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return || (event.text.length > 0 && event.text[0].match(/[a-z0-9]/i))) { root.startInteraction() } } }
+    Keys.onReturnPressed: (event) => {
+        if (!root.interactionMode) {
+            root.startInteraction()
+            event.accepted = true
+        }
+    }
+    Keys.onEnterPressed: (event) => {
+        if (!root.interactionMode) {
+            root.startInteraction()
+            event.accepted = true
+        }
+    }
+    Keys.onPressed: (event) => {
+        if (!root.interactionMode) {
+            if (event.text.length > 0 && event.text[0].match(/[a-z0-9]/i)) {
+                root.startInteraction()
+                event.accepted = true
+            }
+        }
+    }
 }
